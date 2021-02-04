@@ -14,7 +14,7 @@ class GetReviewsUseCase extends UseCase<List<Review>, GetReviewsUseCaseParam> {
       GetReviewsUseCaseParam params) async {
     final StreamController<List<Review>> controller = StreamController();
     try {
-      List<Review> reviews = await repository.getReviews(stayId: params.stayId);
+      List<Review> reviews = await repository.getReviews(stayId: params.stayId, pageSize: params.pageSize, pageNumber: params.pageNumber);
       controller.add(reviews);
       controller.close();
     } catch (e) {
@@ -28,6 +28,10 @@ class GetReviewsUseCase extends UseCase<List<Review>, GetReviewsUseCaseParam> {
 
 class GetReviewsUseCaseParam {
   int stayId;
+  int pageNumber;
+  int pageSize;
 
-  GetReviewsUseCaseParam(this.stayId);
+  GetReviewsUseCaseParam(this.stayId, this.pageSize, this.pageNumber);
+
+
 }

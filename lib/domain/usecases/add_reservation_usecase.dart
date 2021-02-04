@@ -16,7 +16,7 @@ class AddReservationUseCase
     final StreamController<Reservation> controller = StreamController();
     try {
       await reservationRepository.addReservation(
-          accommodationId: params.accommodationId,
+          accommodationTemplateId: params.accommodationId,
           customerFullName: params.customerFulLName,
           customerUsername: params.customerUsername,
           customerPhoneNumber: params.customerPhoneNumber,

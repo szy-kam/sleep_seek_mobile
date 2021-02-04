@@ -7,5 +7,5 @@ abstract class ReviewRepository {
     @required String message});
 
 
-  Future<List<Review>> getReviews({@required int stayId});
+  Future<List<Review>> getReviews({@required int stayId, @required int pageNumber, @required int pageSize});
 }

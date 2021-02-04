@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'dart:wasm';
+
 class Stay {
   final int id;
   final String name;
@@ -9,7 +11,8 @@ class Stay {
   final String mainPhoto;
   final String category;
   final String createdAt;
-  final String avgRate;
+  final int minPrice;
+  String avgRate;
   final String phoneNumber;
   final List<String> photos;
   final List<String> properties;
@@ -28,26 +31,34 @@ class Stay {
       this.phoneNumber,
       this.photos,
       this.properties,
-      this.address);
+      this.address, this.minPrice);
 
   Stay.fromJson(Map<String, dynamic> map)
-      : id = map['id'],
-        name = map['name'],
-        username = map['username'],
-        email = map['email'],
-        description = map['description'],
-        mainPhoto = map['mainPhoto'],
-        category = map['category'],
-        createdAt = map['createdAt'],
-        avgRate = map['avgRate'],
-        phoneNumber = map['phoneNumber'],
-        photos = map['photos'],
-        properties = map['properties'],
-        address = Address.fromJson(map['phoneNumber']);
+      : id = map['id'] as int,
+        minPrice = map['minPrice'] as int,
+        name = map['name'] as String,
+        username = map['username'] as String,
+        email = map['email'] as String,
+        description = map['description'] as String,
+        mainPhoto = map['mainPhoto'] as String,
+        category = map['category'] as String,
+        createdAt = map['createdAt'] as String,
+        avgRate = map['avgRate'] as String,
+        phoneNumber = map['phoneNumber'] as String,
+        photos = List<String>.from(map['photos']),
+        properties = List<String>.from(map['properties']),
+        address = Address.fromJson(map['address']){
+    if(avgRate == "0"){
+      avgRate = "0,0";
+    }
+  }
+
+
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
+        'minPrice' : minPrice,
         'username': username,
         'email': email,
         'description': description,
@@ -65,6 +76,7 @@ class Stay {
         'name': name,
         'username': username,
         'email': email,
+        'minPrice' : minPrice.toString(),
         'description': description,
         'mainPhoto': mainPhoto,
         'category': category,

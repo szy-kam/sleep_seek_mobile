@@ -43,6 +43,8 @@ class GetStaysByParametersUseCaseParam {
   int pageNumber;
   String country;
   String city;
+  String priceFrom;
+  String priceTo;
   String dateFrom;
   String dateTo;
   String category;
@@ -51,5 +53,18 @@ class GetStaysByParametersUseCaseParam {
   String order;
   String name;
 
-  GetStaysByParametersUseCaseParam(this.pageNumber, this.pageSize);
+  GetStaysByParametersUseCaseParam(
+      {this.pageSize,
+      this.pageNumber,
+      this.country,
+      this.city,
+      this.dateFrom,
+      this.priceFrom,
+      this.priceTo,
+      this.dateTo,
+      this.category,
+      this.properties,
+      this.orderBy,
+      this.order,
+      this.name});
 }
